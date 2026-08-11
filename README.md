@@ -85,15 +85,27 @@ Cada notebook trae un badge [![Abrir en Colab](https://colab.research.google.com
 
 ### Paso 4 — Carga tus keys en los Secrets de Colab
 
-En la barra lateral izquierda de Colab, ícono **🔑 Secrets** → **Add new secret**. Crea dos:
+En la barra lateral izquierda de Colab, ícono **🔑 Secrets** → **Add new secret**.
 
-| Name | Value |
-|---|---|
-| `LLM_API_KEY` | tu key de Groq |
-| `GOOGLE_API_KEY` | tu key de Google AI Studio |
+El nombre debe escribirse **exactamente así** (mayúsculas y guiones bajos incluidos), porque
+es el nombre que buscan los notebooks:
 
-**Activa el interruptor "Notebook access"** en cada uno. Los secrets quedan guardados en tu
-cuenta: los configuras una vez y sirven para todos los notebooks del curso.
+| Name (exacto) | Value | ¿Obligatorio? | Se usa en |
+|---|---|---|---|
+| `LLM_API_KEY` | tu key de Groq | **Sí** | Todos los notebooks |
+| `GOOGLE_API_KEY` | tu key de Google AI Studio | **Sí, desde IL1.3** | RA1/IL1.3 y RA1/IL1.4 (embeddings) |
+| `LANGSMITH_API_KEY` | tu key de LangSmith | No, opcional | RA1/IL1.4 (`2-langsmith-evaluation.ipynb`) |
+
+> ⚠️ **Activa el interruptor "Notebook access" en cada secreto.** Si el secreto existe pero
+> el interruptor está apagado, el notebook no puede leerlo y la variable queda vacía, con un
+> error de credenciales más adelante. Es el error de configuración más habitual.
+
+Los secrets se guardan en tu cuenta de Google, no en el notebook: **los configuras una sola vez
+y sirven para todos los notebooks del curso**, incluso en sesiones futuras.
+
+Si más adelante rotas una key, **borra el secreto y créalo de nuevo** en lugar de editar el
+valor: editar sobre el texto existente suele dejar restos del valor anterior y produce un
+`401 Invalid API Key` difícil de diagnosticar.
 
 ### Paso 5 — Ejecuta
 

@@ -111,7 +111,7 @@ Responde SOLO con el número:"""
 
     try:
         result = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=os.getenv("LLM_MODEL", "llama-3.3-70b-versatile"),
             messages=[{"role": "user", "content": eval_prompt}],
             temperature=0.1,
             max_tokens=10
@@ -140,7 +140,7 @@ Responde SOLO con el número:"""
 
     try:
         result = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=os.getenv("LLM_MODEL", "llama-3.3-70b-versatile"),
             messages=[{"role": "user", "content": eval_prompt}],
             temperature=0.1,
             max_tokens=10
@@ -165,7 +165,7 @@ Responde SOLO 'SI' o 'NO':"""
         
         try:
             result = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model=os.getenv("LLM_MODEL", "llama-3.3-70b-versatile"),
                 messages=[{"role": "user", "content": eval_prompt}],
                 temperature=0.1,
                 max_tokens=5
@@ -229,7 +229,7 @@ Responde basándote únicamente en el contexto proporcionado."""
 
     try:
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=os.getenv("LLM_MODEL", "llama-3.3-70b-versatile"),
             messages=[{"role": "user", "content": prompt}],
             temperature=0.7,
             max_tokens=600
