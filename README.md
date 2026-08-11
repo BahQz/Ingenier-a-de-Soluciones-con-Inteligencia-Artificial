@@ -121,6 +121,49 @@ cuántos segundos esperar, y la cuota se va liberando de a poco.
 
 ---
 
+## 🔧 Si algo falla
+
+El mensaje de error dice exactamente qué revisar:
+
+| Mensaje | Qué significa | Solución |
+|---|---|---|
+| `Connection error.` | No se alcanza el servidor: red, firewall o proxy | Ver abajo |
+| `401` / `Missing credentials` | La key no llegó al notebook | Revisa los Secrets de Colab (con "Notebook access" activado) o tu `.env` |
+| `429 rate_limit_exceeded` | Agotaste la cuota gratuita | Espera los segundos que indica el error, o cambia a `llama-3.1-8b-instant` |
+| `404` | El `base_url` apunta a un endpoint equivocado | Confirma que `LLM_BASE_URL` sea `https://api.groq.com/openai/v1` |
+| `ModuleNotFoundError` | Falta instalar dependencias | Ejecuta la primera celda del notebook (o `pip install -r requirements.txt` en local) |
+
+### Diagnóstico de `Connection error.`
+
+Este error **no es de tu código**: significa que la máquina no pudo abrir la conexión.
+Suele pasar en redes institucionales que bloquean dominios, o detrás de un proxy o VPN.
+Pega esto en una celda para ubicar el punto exacto de la falla:
+
+```python
+import os, socket, httpx
+print("LLM_BASE_URL:", os.getenv("LLM_BASE_URL"))
+try:
+    print("DNS api.groq.com ->", socket.gethostbyname("api.groq.com"))
+except Exception as e:
+    print("DNS FALLA ->", e, "  (dominio bloqueado por la red)")
+try:
+    print("HTTPS ->", httpx.get("https://api.groq.com/openai/v1/models", timeout=15).status_code)
+except Exception as e:
+    print("HTTPS FALLA ->", type(e).__name__, "  (firewall o proxy)")
+```
+
+- **Falla el DNS** → la red bloquea el dominio. Prueba con otra red (datos del celular)
+  o pide a TI que habilite `api.groq.com`.
+- **DNS bien pero falla HTTPS** → hay un proxy o firewall en medio.
+- **Ambos bien pero el notebook falla** → reinicia el entorno de ejecución y vuelve a
+  correr las celdas desde la primera.
+
+> **Ejecutar en Google Colab evita este problema por completo**, porque el código corre
+> en la infraestructura de Google y no en la red del instituto. Si estás en local y
+> `Connection error.` persiste, abre el notebook en Colab con su badge.
+
+---
+
 ## 💻 Alternativa: ejecución local
 
 - Python 3.10+
