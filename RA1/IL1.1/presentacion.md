@@ -50,14 +50,19 @@ pip install -r requirements.txt
 ---
 
 ## Slide 4: Conexión Directa con API
-**Título:** Notebook 1 - GitHub Models API
+**Título:** Notebook 1 - Conexión directa con la API (Groq)
 
 **Pasos a seguir:**
-1. Configurar cliente OpenAI con base_url personalizada
-2. Realizar primera llamada básica al modelo
-3. Explorar parámetros: temperature, max_tokens
-4. Implementar manejo de errores
-5. Usar mensajes de sistema para definir comportamiento
+1. Preparar el entorno: instalar dependencias y cargar las credenciales
+   (Secrets de Colab o archivo `.env`)
+2. Configurar el cliente `OpenAI` con `base_url` apuntando a Groq
+3. Realizar la primera llamada e interpretar la respuesta: contenido,
+   modelo usado y consumo de tokens
+4. Definir el comportamiento del modelo con mensajes `system`
+5. Explorar `temperature` comparando la misma consigna con 0.1 / 0.5 / 0.9
+
+> El manejo de errores con `try/except` no es una etapa aparte: acompaña a
+> **todas** las llamadas desde el paso 3.
 
 **Código básico:**
 ```python
