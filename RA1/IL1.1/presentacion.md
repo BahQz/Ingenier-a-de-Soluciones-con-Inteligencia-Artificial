@@ -30,16 +30,16 @@
 ## Slide 3: Configuración del Entorno
 **Título:** Preparación Técnica
 
-**Variables de entorno requeridas:**
+**Variables de entorno requeridas** (archivo `.env` en la raíz):
 ```bash
-export GITHUB_BASE_URL="https://models.inference.ai.azure.com"
-export GITHUB_TOKEN="tu_token_de_github"
-export OPENAI_BASE_URL="https://models.inference.ai.azure.com"
+LLM_BASE_URL="https://api.groq.com/openai/v1"
+LLM_API_KEY="gsk_..."          # gratis en console.groq.com/keys
+GOOGLE_API_KEY="AIza..."       # gratis en aistudio.google.com/apikey (solo embeddings)
 ```
 
 **Dependencias:**
 ```bash
-pip install openai langchain langchain-openai
+pip install -r requirements.txt
 ```
 
 **Mejores prácticas de seguridad:**
@@ -62,8 +62,8 @@ pip install openai langchain langchain-openai
 **Código básico:**
 ```python
 client = OpenAI(
-    base_url=os.environ.get("GITHUB_BASE_URL"),
-    api_key=os.environ.get("GITHUB_TOKEN")
+    base_url=os.environ.get("LLM_BASE_URL"),
+    api_key=os.environ.get("LLM_API_KEY")
 )
 ```
 
@@ -81,9 +81,9 @@ client = OpenAI(
 **Implementación:**
 ```python
 llm = ChatOpenAI(
-    base_url=os.getenv("OPENAI_BASE_URL"),
-    api_key=os.getenv("GITHUB_TOKEN"),
-    model="gpt-4o"
+    base_url=os.getenv("LLM_BASE_URL"),
+    api_key=os.getenv("LLM_API_KEY"),
+    model="llama-3.3-70b-versatile"
 )
 ```
 

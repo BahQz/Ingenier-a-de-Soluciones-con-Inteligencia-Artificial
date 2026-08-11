@@ -46,25 +46,103 @@ Cada subcarpeta IL contiene ejemplos en Python (`.py`), notebooks (`.ipynb`) o g
 
 ## 🚦 ¿Cómo usar este repositorio?
 
-1. **Lee los README.md** de cada carpeta para entender el objetivo de cada módulo.
-2. **Ejecuta los ejemplos Python** en tu entorno local (requiere Python 3.8+ y, para algunos ejemplos, instalar dependencias como `langchain`, `crewai`, `openai`).
-3. **Configura tus variables de entorno** si usas APIs (ver sección de variables en este README).
-4. **Explora los notebooks** para prácticas guiadas y experimentos.
+1. **Haz un fork** del repositorio a tu cuenta de GitHub.
+2. **Consigue tus dos API keys** y cárgalas en los Secrets de Colab (ver [Puesta en marcha](#-puesta-en-marcha-google-colab--recomendado)).
+3. **Abre los notebooks en Colab** con el badge que trae cada uno y ejecútalos en orden.
+4. **Lee los README.md** de cada carpeta para entender el objetivo de cada módulo.
 5. **Consulta los archivos `.md`** para teoría, mejores prácticas y requisitos de cada entrega.
 
 ---
 
-## ⚙️ Requisitos y dependencias
+## 🚀 Puesta en marcha (Google Colab — recomendado)
 
-- Python 3.8+
-- Jupyter Notebook (opcional, para `.ipynb`)
-- Instalar dependencias según el módulo:
-  - `pip install langchain openai crewai` (para agentes y ejemplos avanzados)
-  - Otros: `pandas`, `requests`, etc.
+No necesitas instalar nada en tu computador. **Todo corre en Colab con servicios gratuitos que no piden tarjeta de crédito.**
 
-### Variables de entorno recomendadas
-- `OPENAI_API_KEY` (para ejemplos con OpenAI/LangChain)
-- `GITHUB_TOKEN` (para ejemplos con GitHub API)
+### Paso 1 — Consigue tus dos API keys
+
+| Key | Para qué | Dónde obtenerla |
+|---|---|---|
+| `LLM_API_KEY` | Chat (todos los módulos) | [console.groq.com/keys](https://console.groq.com/keys) |
+| `GOOGLE_API_KEY` | Embeddings (RA1/IL1.3 y IL1.4) | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
+
+Para la de Google basta la misma cuenta con la que entras a Colab.
+
+> **¿Por qué dos proveedores?** Groq no ofrece endpoint de embeddings, así que la parte
+> de RAG vectorial usa Gemini (`gemini-embedding-001`) mientras el chat sigue en Groq.
+
+### Paso 2 — Haz un fork de este repositorio
+
+Botón **Fork** arriba a la derecha en GitHub. Así tus cambios y anotaciones quedan en tu propia copia.
+
+### Paso 3 — Abre el notebook en Colab
+
+Cada notebook trae un badge [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com) al inicio.
+
+> Ojo: ese badge apunta al repositorio del curso. Para abrir **tu fork**, entra a
+> [colab.research.google.com](https://colab.research.google.com) → pestaña **GitHub** →
+> escribe tu usuario y elige el notebook. También puedes reemplazar el nombre de usuario
+> directamente en la URL del badge.
+
+### Paso 4 — Carga tus keys en los Secrets de Colab
+
+En la barra lateral izquierda de Colab, ícono **🔑 Secrets** → **Add new secret**. Crea dos:
+
+| Name | Value |
+|---|---|
+| `LLM_API_KEY` | tu key de Groq |
+| `GOOGLE_API_KEY` | tu key de Google AI Studio |
+
+**Activa el interruptor "Notebook access"** en cada uno. Los secrets quedan guardados en tu
+cuenta: los configuras una vez y sirven para todos los notebooks del curso.
+
+### Paso 5 — Ejecuta
+
+`Entorno de ejecución` → `Ejecutar todas`. La primera celda instala las dependencias en Colab
+(demora ~1 min) y la segunda lee tus keys desde los Secrets. Nunca escribas tus keys
+directamente en una celda.
+
+### Límites del plan gratuito
+
+Las cuotas son **por cuenta**, así que cada quien tiene la suya. Los valores relevantes:
+
+| Servicio | Modelo | Límite diario | Límite por minuto |
+|---|---|---|---|
+| Groq | `llama-3.3-70b-versatile` | 100.000 tokens · 1.000 peticiones | 12.000 tokens · 30 peticiones |
+| Groq | `llama-3.1-8b-instant` | 500.000 tokens · 14.400 peticiones | 6.000 tokens · 30 peticiones |
+| Gemini | `gemini-embedding-001` | 1.000 peticiones | 100 peticiones |
+
+Una pasada completa por los notebooks de RA1 consume del orden de **30.000 tokens**, así que
+el límite diario da para unas tres corridas completas. Si te aparece un error `429`
+`rate_limit_exceeded`, no está roto tu código: agotaste la cuota. El mensaje de error indica
+cuántos segundos esperar, y la cuota se va liberando de a poco.
+
+**Truco:** si estás iterando mucho sobre un ejercicio, cambia temporalmente a
+`llama-3.1-8b-instant`, que tiene cinco veces más presupuesto diario de tokens.
+
+---
+
+## 💻 Alternativa: ejecución local
+
+- Python 3.10+
+- Instalar dependencias y configurar el entorno:
+
+```bash
+pip install -r requirements.txt
+```
+
+Luego copia `.env.example` a `.env` y completa `LLM_API_KEY` y `GOOGLE_API_KEY`
+(mismas keys del Paso 1). Los notebooks detectan si están en Colab o en local y
+leen las credenciales del lugar correcto sin que cambies nada.
+
+`LLM_BASE_URL` ya viene configurado apuntando a Groq, que expone una API compatible con OpenAI.
+`LANGSMITH_API_KEY` es opcional y solo la necesita `RA1/IL1.4/2-langsmith-evaluation.ipynb`
+(gratis en [smith.langchain.com](https://smith.langchain.com/settings)).
+
+> **Las apps de Streamlit** (`RA1/IL1.3/2-text-chunking.py` y `RA1/IL1.4/1-evaluation-rag.py`)
+> requieren ejecución local — Colab no sirve páginas de Streamlit de forma nativa:
+> ```bash
+> streamlit run RA1/IL1.3/2-text-chunking.py
+> ```
 
 ---
 
