@@ -107,6 +107,24 @@ Si más adelante rotas una key, **borra el secreto y créalo de nuevo** en lugar
 valor: editar sobre el texto existente suele dejar restos del valor anterior y produce un
 `401 Invalid API Key` difícil de diagnosticar.
 
+#### Cambiar de proveedor desde Colab (opcional)
+
+Si te quedas sin cuota diaria de Groq, puedes cambiar de proveedor **sin tocar el código**,
+agregando estos secretos adicionales. Si no los defines, todo sigue funcionando con Groq:
+
+| Name (exacto) | Value para usar Mistral |
+|---|---|
+| `LLM_BASE_URL` | `https://api.mistral.ai/v1` |
+| `LLM_MODEL` | `mistral-small-latest` |
+| `LLM_MODEL_SMALL` | `ministral-8b-latest` |
+
+Y en `LLM_API_KEY` pon tu key de Mistral ([console.mistral.ai/api-keys](https://console.mistral.ai/api-keys),
+gratuita). Los embeddings siguen usando Gemini en cualquier caso, así que `GOOGLE_API_KEY`
+no cambia.
+
+> Cualquier proveedor con API compatible con OpenAI sirve: basta apuntar `LLM_BASE_URL`
+> a su endpoint y poner un `LLM_MODEL` que ese proveedor reconozca.
+
 ### Paso 5 — Ejecuta
 
 `Entorno de ejecución` → `Ejecutar todas`. La primera celda instala las dependencias en Colab
