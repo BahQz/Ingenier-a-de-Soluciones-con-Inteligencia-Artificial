@@ -8,3 +8,7 @@ dist
 CLAUDE.md
 GEMINI.md
 .claude/
+
+# Artefactos generados al ejecutar los ejemplos
+agent.log
+*.log

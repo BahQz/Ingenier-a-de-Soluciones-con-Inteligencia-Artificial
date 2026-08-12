@@ -1,6 +1,11 @@
 # Dependencias — Ingeniería de Soluciones con IA
 # Instalación local:  pip install -r requirements.txt
 # En Google Colab:    !pip install -q -r requirements.txt
+#
+# ⚠️ Requiere Python >=3.10 y <3.14. El límite lo impone CrewAI (RA2), que
+# todavía no publica wheels para 3.14. Con Python 3.14 pip resuelve `crewai`
+# a la versión 0.11.2 de 2024, que arrastra langchain 0.1.x y rompe RA1.
+# Google Colab usa una versión compatible, así que allí no hay que hacer nada.
 
 # --- Núcleo LLM / LangChain v1 ---------------------------------------
 openai>=2.0
@@ -17,6 +22,11 @@ langchain-google-genai>=4.0     # embeddings (Gemini)
 # --- RAG --------------------------------------------------------------
 faiss-cpu>=1.9
 tiktoken>=0.8
+
+# --- Agentes multi-agente (RA2) ---------------------------------------
+crewai>=1.15                    # exige Python <3.14
+crewai-tools>=1.0
+wikipedia>=1.4                  # herramienta de ejemplo para los agentes
 
 # --- Evaluación y observabilidad --------------------------------------
 langsmith>=0.10
