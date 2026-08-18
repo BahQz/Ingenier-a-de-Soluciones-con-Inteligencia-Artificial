@@ -2,14 +2,14 @@
 
 ## 📋 Descripción General
 
-En este módulo exploramos los fundamentos de la arquitectura de agentes inteligentes basados en LLM, progresando desde implementaciones básicas hasta frameworks avanzados como LangChain y CrewAI. Incluye configuraciones específicas para integración con GitHub Models API y soluciones a problemas comunes de compatibilidad.
+En este módulo exploramos los fundamentos de la arquitectura de agentes inteligentes basados en LLM, progresando desde implementaciones básicas hasta frameworks avanzados como LangChain y CrewAI. Incluye configuraciones específicas para integración con los proveedores compatibles con OpenAI y soluciones a problemas comunes de compatibilidad.
 
 ## 🎯 Objetivos de Aprendizaje
 
 - Comprender qué es un agente inteligente y sus componentes fundamentales (cerebro, memoria, herramientas, planificación)
 - Dominar el ciclo de razonamiento ReAct (Reason + Act) y el Function Calling nativo de OpenAI
 - Implementar agentes desde cero y usando frameworks LangChain y CrewAI
-- Configurar correctamente frameworks con GitHub Models API
+- Configurar el proveedor de LLM en LangChain y en CrewAI
 - Diseñar equipos de agentes colaborativos para tareas complejas
 - Entender criterios de selección entre diferentes frameworks
 
@@ -145,7 +145,7 @@ con las variables `LLM_*` y pasarlo a cada `Agent(llm=llm)`.
 ### Base Establecida
 - ✅ Fundamentos sólidos de agentes inteligentes
 - ✅ Experiencia con frameworks principales
-- ✅ Configuraciones de producción para GitHub Models API
+- ✅ Configuración del proveedor mediante variables `LLM_*`
 - ✅ Patrones de colaboración entre agentes
 - ✅ Debugging y troubleshooting de sistemas complejos
 
@@ -158,7 +158,7 @@ con las variables `LLM_*` y pasarlo a cada `Agent(llm=llm)`.
 
 ### Herramientas de Desarrollo
 - [LangSmith](https://smith.langchain.com/) - Observabilidad para agentes LangChain
-- [GitHub Models](https://github.com/marketplace/models) - Acceso a modelos de IA
+- [Groq](https://console.groq.com/docs/models) · [Mistral](https://docs.mistral.ai/) - Modelos gratuitos
 
 ### Troubleshooting y Soporte
 - [GitHub Issues - CrewAI](https://github.com/joaomdmoura/crewAI/issues)

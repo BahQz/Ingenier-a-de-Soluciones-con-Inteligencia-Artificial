@@ -6,7 +6,7 @@ Esta unidad introduce los conceptos fundamentales de los Modelos de Lenguaje Gra
 
 ## Videos de cada archivo del curso:
 
-- **1-github_model_api.ipynb**: Conexión directa a la API de GitHub Models.
+- **1-github_model_api.ipynb**: Conexión directa a la API (Groq, compatible con OpenAI).
   [![Ver Video](https://img.youtube.com/vi/oYvwSROBTl0/hqdefault.jpg)](https://www.youtube.com/watch?v=oYvwSROBTl0)
 - **2-langchain_model_api.ipynb**: Abstracción de la API con LangChain.
   [![Ver Video](https://img.youtube.com/vi/v6Dgw0CMAfs/hqdefault.jpg)](https://www.youtube.com/watch?v=v6Dgw0CMAfs)
@@ -69,10 +69,12 @@ Un LLM no tiene estado. Este cuaderno enseña cómo darle "memoria" para que pue
 - **Qué aprenderás**:
     - La importancia de la memoria para conversaciones coherentes.
     - Implementar diferentes estrategias de memoria:
-        - `ConversationBufferMemory`: Guarda todo el historial.
-        - `ConversationBufferWindowMemory`: Guarda las últimas `k` interacciones.
-        - `ConversationSummaryMemory`: Usa un LLM para resumir la conversación y ahorrar tokens.
-    - Integrar la memoria en cadenas de conversación (`ConversationChain`).
+        - **Buffer completo**: guarda todo el historial.
+        - **Ventana de `k` interacciones**: solo las más recientes.
+        - **Resumen**: usa un LLM para condensar la conversación y ahorrar tokens.
+    - Integrar la memoria con `RunnableWithMessageHistory`. Las clases clásicas
+      (`ConversationBufferMemory` y familia) están deprecadas en LangChain v1;
+      su reemplazo a futuro es la persistencia de LangGraph.
 - **Cómo usarlo**:
     1. Ejecuta los ejemplos de cada tipo de memoria para entender sus ventajas y desventajas.
     2. Analiza la comparación final para ver cómo cada tipo de memoria responde a la misma secuencia de preguntas.
@@ -151,7 +153,7 @@ Esta unidad incluye:
 ## Recursos Adicionales
 
 - [Documentación OpenAI API](https://platform.openai.com/docs)
-- [GitHub Models Documentation](https://docs.github.com/en/github-models)
+- [Documentación de Groq](https://console.groq.com/docs/models)
 - [LangChain Documentation](https://python.langchain.com/docs/)
 - [Transformer Architecture Paper](https://arxiv.org/abs/1706.03762)
 

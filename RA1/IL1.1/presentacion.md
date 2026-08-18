@@ -19,7 +19,7 @@
 - **Arquitectura:** Basados en Transformers
 - **Funcionamiento:** Predicción de tokens basada en contexto
 - **Capacidades:** Generación, comprensión y análisis de texto
-- **Proveedores principales:** OpenAI, GitHub Models, Anthropic, Google
+- **Proveedores principales:** Groq, Mistral, OpenAI, Anthropic, Google
 
 **Conceptos clave:**
 - Tokens, embeddings, atención
@@ -179,7 +179,7 @@ for chunk in llm.stream([HumanMessage(content=prompt)]):
 
 **Recursos adicionales:**
 - [Documentación OpenAI API](https://platform.openai.com/docs)
-- [GitHub Models Documentation](https://docs.github.com/en/github-models)
+- [Documentación de Groq](https://console.groq.com/docs/models)
 - [LangChain Documentation](https://python.langchain.com/docs/)
 - [Transformer Architecture Paper](https://arxiv.org/abs/1706.03762)
 
