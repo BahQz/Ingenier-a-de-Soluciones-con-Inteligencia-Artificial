@@ -32,8 +32,8 @@
 
 **Variables de entorno requeridas** (archivo `.env` en la raíz):
 ```bash
-LLM_BASE_URL="https://api.groq.com/openai/v1"
-LLM_API_KEY="gsk_..."          # gratis en console.groq.com/keys
+LLM_BASE_URL="https://api.mistral.ai/v1"
+LLM_API_KEY="gsk_..."          # gratis en console.mistral.ai/api-keys
 GOOGLE_API_KEY="AIza..."       # gratis en aistudio.google.com/apikey (solo embeddings)
 ```
 
@@ -88,7 +88,7 @@ client = OpenAI(
 llm = ChatOpenAI(
     base_url=os.getenv("LLM_BASE_URL"),
     api_key=os.getenv("LLM_API_KEY"),
-    model="llama-3.3-70b-versatile"
+    model="mistral-small-latest"
 )
 ```
 

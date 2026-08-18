@@ -84,7 +84,7 @@ result = agent.run("¿Quién fue Marie Curie?")
 llm = ChatOpenAI(
     base_url=os.getenv("LLM_BASE_URL"),
     api_key=os.getenv("LLM_API_KEY"),
-    model=os.getenv("LLM_MODEL", "llama-3.3-70b-versatile"),
+    model=os.getenv("LLM_MODEL", "mistral-small-latest"),
     temperature=0,
 )
 ```
@@ -141,7 +141,7 @@ clase `LLM`. El prefijo `openai/` le indica que hable el protocolo de OpenAI con
 nuestro `base_url`, lo que permite usar cualquier proveedor compatible:
 ```python
 llm = LLM(
-    model="openai/" + os.getenv("LLM_MODEL", "llama-3.3-70b-versatile"),
+    model="openai/" + os.getenv("LLM_MODEL", "mistral-small-latest"),
     base_url=os.getenv("LLM_BASE_URL"),
     api_key=os.getenv("LLM_API_KEY"),
 )
@@ -178,9 +178,9 @@ llm = LLM(
 
 **Variables de entorno requeridas**:
 ```bash
-LLM_BASE_URL="https://api.groq.com/openai/v1"
+LLM_BASE_URL="https://api.mistral.ai/v1"
 LLM_API_KEY="tu_key"
-LLM_MODEL="llama-3.3-70b-versatile"
+LLM_MODEL="mistral-small-latest"
 ```
 
 **Patrón de mapeo para compatibilidad**:
@@ -189,14 +189,14 @@ LLM_MODEL="llama-3.3-70b-versatile"
 llm = ChatOpenAI(
     base_url=os.getenv("LLM_BASE_URL"),
     api_key=os.getenv("LLM_API_KEY"),
-    model=os.getenv("LLM_MODEL", "llama-3.3-70b-versatile"),
+    model=os.getenv("LLM_MODEL", "mistral-small-latest"),
     temperature=0,
 )
 
 # Para CrewAI (requiere mapeo)
 os.environ["OPENAI_API_BASE"] = os.environ.get("OPENAI_BASE_URL", "")
 llm = LLM(
-    model="openai/" + os.getenv("LLM_MODEL", "llama-3.3-70b-versatile"),
+    model="openai/" + os.getenv("LLM_MODEL", "mistral-small-latest"),
     base_url=os.getenv("LLM_BASE_URL"),
     api_key=os.getenv("LLM_API_KEY"),
 )

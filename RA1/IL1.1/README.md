@@ -87,8 +87,8 @@ Un LLM no tiene estado. Este cuaderno enseña cómo darle "memoria" para que pue
 Copia `.env.example` a `.env` en la raíz del repo y completa:
 
 ```bash
-LLM_BASE_URL="https://api.groq.com/openai/v1"   # Groq, API compatible con OpenAI
-LLM_API_KEY="gsk_..."                            # https://console.groq.com/keys
+LLM_BASE_URL="https://api.mistral.ai/v1"   # Groq, API compatible con OpenAI
+LLM_API_KEY="gsk_..."                            # https://console.mistral.ai/api-keys
 ```
 
 Los notebooks cargan el `.env` automáticamente (y en Google Colab leen el panel 🔑 **Secrets**).
@@ -122,7 +122,7 @@ from langchain_openai import ChatOpenAI
 llm = ChatOpenAI(
     base_url=os.getenv("LLM_BASE_URL"),
     api_key=os.getenv("LLM_API_KEY"),
-    model="llama-3.3-70b-versatile"
+    model="mistral-small-latest"
 )
 ```
 
